@@ -45,6 +45,13 @@ int Menu(vector<Course> *ptr)
 			break;
 		}
 
+		case 2:
+		{
+			AddStudent(ptr);
+
+			break;
+		}
+
 		case 3:
 		{
 			PrintCourse(ptr);
@@ -72,9 +79,9 @@ int Menu(vector<Course> *ptr)
 
 void AddCourse(vector<Course> *ptr)
 {
-	vector<Course> *temp = ptr;
+	Course *newCourse = nullptr;
 
-	cout << "Enter a new course name." << endl;
+	cout << "Enter course name." << endl;
 
 	string newClass;
 
@@ -88,16 +95,59 @@ void AddCourse(vector<Course> *ptr)
 
 	cout << "Adding Course" << endl << endl;
 
-	temp->push_back(Course(newClass, units));
+	newCourse = new Course(newClass, units);
+
+	ptr->push_back(*newCourse);
 }
 
+void AddStudent(vector<Course> *ptr)
+{
+	string course;
+
+	int newStudentID;
+
+	string newStudentName;
+
+	cout << "Enter course name." << endl;
+
+	getline(cin, course);
+
+	cout << "Enter student ID." << endl;
+
+	cin >> newStudentID;
+
+	cin.ignore();
+
+	cout << "Enter student name." << endl;
+
+	getline(cin, newStudentName);
+
+	Student *newStudent = nullptr;
+
+	newStudent = new Student(newStudentID, newStudentName);
+
+	for (int i = 0; i < ptr->size(); i++)
+	{
+		if (ptr->at(i).getName() == course)
+		{
+			//ptr->at(i)push_back(*newStudent);
+		}
+		else
+		{
+			cout << "No class match input." << endl;
+		}
+	}
+
+
+
+}
 void PrintCourse(vector<Course> *ptr)
 {
-	int size = ptr->size();
+	//int size = ptr->size();
 
-	cout << "Found" << size << "course(s)." << endl;
+	cout << "Found" << ptr->size() << "course(s)." << endl;
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < ptr->size(); i++)
 	{
 		string temp = ptr->at(i).getName();
 
@@ -110,6 +160,8 @@ void PrintCourse(vector<Course> *ptr)
 void Quit(bool &access)
 {
 	cout << "Come back again!" << endl;
+
+	cin.ignore();
 
 	access = true;
 }

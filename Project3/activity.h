@@ -60,6 +60,8 @@ int Menu(vector<Course> *ptr);
 
 void AddCourse(vector<Course> *ptr);
 
+void AddStudent(vector<Course> *ptr);
+
 void PrintCourse(vector<Course> *ptr);
 
 void Quit(bool &access);
